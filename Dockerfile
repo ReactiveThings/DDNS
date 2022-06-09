@@ -3,16 +3,13 @@
 FROM mcr.microsoft.com/dotnet/runtime:6.0-bullseye-slim-arm32v7 AS base
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS publish
 WORKDIR /src
 COPY ["ReactiveThings.DDNS.csproj", "."]
 RUN dotnet restore "./ReactiveThings.DDNS.csproj" -r linux-arm
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "ReactiveThings.DDNS.csproj" -c Release -o /app/build -r linux-arm --no-restore
-
-FROM build AS publish
-RUN dotnet publish "ReactiveThings.DDNS.csproj" -c Release -o /app/publish -r linux-arm --no-build
+RUN dotnet publish "ReactiveThings.DDNS.csproj" -c Release -o /app/publish -r linux-arm --self-contained false --no-restore
 
 FROM base AS final
 WORKDIR /app
