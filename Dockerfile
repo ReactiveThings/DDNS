@@ -16,7 +16,7 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 RUN apt-get update && apt-get -y install cron
-RUN (crontab -l ; echo "* * * * * echo $PWD > /proc/1/fd/1 2>/proc/1/fd/2") | crontab
-RUN echo $PWD
+RUN (crontab -l ; echo "* * * * * dotnet app/ReactiveThings.DDNS.dll > /proc/1/fd/1 2>/proc/1/fd/2") | crontab
+
 CMD ["cron", "-f"]
 #ENTRYPOINT ["dotnet", "ReactiveThings.DDNS.dll"]
