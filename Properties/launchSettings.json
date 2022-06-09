@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ReactiveThings.DDNS": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
