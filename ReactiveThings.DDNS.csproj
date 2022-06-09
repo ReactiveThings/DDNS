@@ -8,14 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="entrypoint.sh" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="entrypoint.sh" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="csharp-ovh" Version="4.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
     <PackageReference Include="System.CommandLine.DragonFruit" Version="0.4.0-alpha.22272.1" />
