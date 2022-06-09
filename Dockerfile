@@ -16,7 +16,7 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 RUN apt-get update && apt-get -y install cron
-RUN (crontab -l ; echo "* * * * * rpi echo 'The test cron ran at $(date)' > /proc/1/fd/1 2>/proc/1/fd/2") | crontab
+RUN (crontab -l ; echo "* * * * * echo 'The test cron ran at $(date)' > /proc/1/fd/1 2>/proc/1/fd/2") | crontab
 
 CMD ["cron", "-f"]
 #ENTRYPOINT ["dotnet", "ReactiveThings.DDNS.dll"]
