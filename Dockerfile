@@ -14,4 +14,9 @@ RUN dotnet publish "ReactiveThings.DDNS.csproj" -c Release -o /app/publish -r li
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ReactiveThings.DDNS.dll"]
+
+RUN apt-get update && apt-get -y install cron
+RUN (crontab -l ; echo "* * * * * root echo 'The test cron ran at $(date)' > /proc/1/fd/1 2>/proc/1/fd/2") | crontab
+
+CMD ["cron", "-f"]
+#ENTRYPOINT ["dotnet", "ReactiveThings.DDNS.dll"]
